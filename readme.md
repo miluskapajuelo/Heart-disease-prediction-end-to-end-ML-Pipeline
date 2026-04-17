@@ -31,16 +31,62 @@ This is a **binary classification problem**.
     - Maximum heart rate (thalach)
     - Thalassemia (thal)
 
-![correlation_matrix](./assets/correlation_matrix.png)
-
 
 ## Project Structure
+
+## Project Structure
+
+
+```text
+.
 ├── data/
+│   ├── raw/               
+│   └── processed/          
+│
 ├── notebooks/
+│   ├── 01_eda.ipynb     
+│   ├── 02_preprocessing.ipynb
+│   ├── 03_modeling.ipynb
+│   └── 04_explainability.ipynb   
+│
 ├── src/
+│   ├── __init__.py
+│   ├── data/
+│   │   ├── load_data.py
+│   │   ├── preprocess.py
+│   │   └── split_data.py
+│   │
+│   ├── features/
+│   │   └── build_features.py
+│   │
+│   ├── models/
+│   │   ├── train.py
+│   │   ├── predict.py
+│   │   ├── evaluate.py
+│   │   └── explain.py
+│   │
+│   ├── visualization/
+│   │   └── plots.py
+│   │
+│   └── utils/
+│       ├── config.py
+│       └── helpers.py
+│
 ├── models/
-├── assests/
+│   ├── best_model.pkl
+│   └── preprocessor.pkl
+│
+│
+├── tests/
+│   ├── test_preprocess.py
+│   ├── test_features.py
+│   └── test_predict.py
+│
+├── requirements.txt
 ├── README.md
+└── .gitignore
+```
+
 
 
 ## Tech Stack
@@ -52,27 +98,64 @@ This is a **binary classification problem**.
 - SHAP
 - Matplotlib / Seaborn
 
+## Installation & Setup
+
+This project follows a modular structure to allow easy reproducibility and scalability across environments.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/heart-disease-ml.git
+cd heart-disease-ml
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Make sure you have Python 3.9+ installed
+
+### 4. Run the project
+
+```bash
+python src/train.py
+```
 
 ## Exploratory Data Analysis
 
 ### Categorical attributes
 
-![graphics_categorical_attributes](./assets/graphics_categorical_attributes.png)
+![graphics_categorical_attributes](./assests/graphics_categorical_attributes.png)
 
 ### Continuous attributes
 
-![graphics_continuous_attributes](./assets/graphics_continuous_attributes.png)
+![graphics_continuous_attributes](./assests/graphics_continuous_attributes.png)
 
 
 ## Feature Engineering
 
-est_stroke_volume : 
+- **Cardiac Capacity** = `thalach / age`  
+  → captures heart performance relative to patient age
 
-df['cardiac_capacity'] = df['thalach'] / df['age']
+- **Ischemia Score** = normalized `oldpeak` + `exang` + `ca`  
+  → combines multiple indicators of heart stress into a single metric
 
-df['isquemia_score'] = (df['oldpeak'] / df['oldpeak'].max()) + df['exang'] + (df['ca'] / 3)
+- **Estimated Stroke Volume** = `(trestbps / thalach) * (age / 50)`  
+  → approximates cardiovascular efficiency under stress
 
-df['est_stroke_volume'] = (df['trestbps'] / df['thalach']) * (df['age'] / 50)
+## Correlation festures
+
+![correlation_matrix](./assests/correlation_matrix.png)
 
 ## Insight
 
@@ -116,7 +199,7 @@ Top feature contributes ~29% of total importance
 Model relies on multiple complementary signals
 
 
-![SHAP (test set)](./assets/SHAP (test set).png)
+![SHAP (test set)](./assests/SHAP%20(test%20set).png)
 
 
 # Confusion Matrix
@@ -128,7 +211,7 @@ False Positives: 9
 
 The model achieves 95% recall for disease detection, minimizing missed cases — critical in healthcare.
 
-![Confusion matrix_ XGBoost (test set)](./assets/Confusion matrix_ XGBoost (test set).png)
+![Confusion matrix_ XGBoost (test set)](./assests/Confusion%20matrix_%20XGBoost%20(test%20set).png)
 
 
 # ROC Curve
@@ -138,7 +221,7 @@ Curve close to top-left corner
 
 The model demonstrates excellent class separability and robustness across thresholds.
 
-![ROC_curve_XGBoost (test set)](./assets/ROC_curve_XGBoost (test set).png)
+![ROC_curve_XGBoost (test set)](./assests/ROC_curve_XGBoost%20(test%20set).png)
 
 ## Final Model
 Random Forest
