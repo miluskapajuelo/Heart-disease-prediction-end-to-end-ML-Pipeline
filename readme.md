@@ -26,10 +26,20 @@ This is a **binary classification problem**.
 - Source: [Kaggle Heart Disease dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset)
 - ~300 patient records
 - Includes clinical variables such as:
-    - Age
-    - Chest pain type (cp)
-    - Maximum heart rate (thalach)
-    - Thalassemia (thal)
+    - Age 
+    - Sex (0=female, 1=male) 
+    - cp (Chest pain type) (0-3 scale)
+    - thalach (Maximum heart rate): The highest heart rate archived during excercise
+    - thal (thalassemia): A blood disorder result(0-3 range)
+    - trestbps (resting blood pressure): In mmHg on admission to the hospital.
+    - chol (serum cholesterol): mg/dl
+    - oldpeak (ST depression): ST depression induced by exercise relative to rest
+    - fbs (fasting blood sugar): >120 mg/dl (1=true, 0=false)
+    - restecg (resting ECG): (0-2 range)
+    - exang (exercise-induced angina) (1=yes, 0=no)
+    - ca(number of major vessels) (0-4 range)
+    - slope: the slope of the peak exercise ST segment (0-2 range)
+    
 
 
 ## Project Structure
